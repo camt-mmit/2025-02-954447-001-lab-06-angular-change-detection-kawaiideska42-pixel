@@ -1,0 +1,97 @@
+/* Container การจัดการระยะห่างหลัก */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* การตกแต่ง Card ของแต่ละ Section */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e0e6ed;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ปรับแต่ง Input Number */
+input[type='number'] {
+  width: 100px;
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type='number']:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* ส่วนแสดงผล Total (Summary) */
+.bg-light {
+  background-color: #f8f9fa !important;
+  border-radius: 8px;
+  border-left: 4px solid #28a745; /* เพิ่มเส้นสีเขียวให้ดูเป็นผลรวม */
+}
+
+/* การจัดการปุ่มต่างๆ */
+button {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+/* ปุ่มลบ (สีแดง/เทา) */
+button[click*='remove'] {
+  background-color: #fff1f0;
+  color: #ff4d4f;
+  border-color: #ffa39e;
+}
+
+button[click*='remove']:hover:not(:disabled) {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+/* ปุ่ม Add Number */
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+/* ปุ่ม Add New Section (ด้านล่างสุด) */
+.btn-success {
+  background-color: #e42214;
+  color: white;
+  padding: 12px;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+/* จัดตำแหน่งลำดับตัวเลข 1, 2, 3 ให้ดูเด่นขึ้น */
+span {
+  display: inline-block;
+  width: 25px;
+  font-weight: bold;
+  color: #6c757d;
+}
