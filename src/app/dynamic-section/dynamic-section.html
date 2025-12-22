@@ -1,0 +1,43 @@
+<div class="container p-4">
+  @for (section of sections; track section; let i = $index) {
+    <div class="card mb-4 p-3 border shadow-sm">
+      <div class="d-flex justify-content-between">
+        <button type="button" (click)="removeSection(i)" [disabled]="sections.length === 1">
+          Remove Section
+        </button>
+      </div>
+
+      <div class="my-3">
+        @for (num of section.numbers; track num; let j = $index) {
+          <div class="mb-2">
+            <span>{{ j + 1 }}</span>
+
+            <input
+              type="number"
+              #elem
+              [value]="num.value"
+              (input)="onNumberChange(i, j, elem.valueAsNumber)"
+              class="mx-2"
+            />
+
+            <button (click)="removeNumber(i, j)" [disabled]="section.numbers.length === 1">
+              Remove
+            </button>
+          </div>
+        }
+      </div>
+
+      <button type="button" (click)="addNumber(i)" class="btn btn-sm btn-primary">
+        + Add Number
+      </button>
+
+      <div class="mt-3 p-2 bg-light">
+        <div><strong>Total:</strong> {{ getSummaryText(i) }}</div>
+      </div>
+    </div>
+  }
+
+  <button type="button" (click)="addSection()" class="btn btn-success w-100">
+    Add New Section
+  </button>
+</div>

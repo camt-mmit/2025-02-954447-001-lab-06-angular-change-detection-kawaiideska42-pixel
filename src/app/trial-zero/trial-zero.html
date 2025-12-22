@@ -1,0 +1,23 @@
+<h2>Trial Zero</h2>
+
+<div>
+  <button type="button" (click)="withSignal.set(!withSignal())" class="app-cmp-button">
+    Toggle With Signal
+  </button>
+</div>
+
+<div>
+  <label>
+    <b>Normal Variable</b>
+    <output class="app-cl-number">{{ i }}</output>
+  </label>
+</div>
+
+@if (withSignal()) {
+  <div>
+    <label>
+      <b>Signal</b>
+      <output class="app-cl-number">{{ j() }}</output>
+    </label>
+  </div>
+}

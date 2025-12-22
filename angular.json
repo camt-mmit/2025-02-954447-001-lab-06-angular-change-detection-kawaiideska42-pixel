@@ -2,7 +2,11 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "analytics": "fe9714cc-0342-484a-b150-c000651f953e",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -71,6 +75,15 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }

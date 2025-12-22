@@ -1,0 +1,24 @@
+a {
+  color: var(--app-primary-color);
+  text-decoration: none;
+  border: 1px solid var(--app-primary-color);
+  border-radius: 4px;
+}
+a.-st-active {
+  background-color: var(--app-surface-container-color);
+}
+
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.angular-logo {
+  height: 200px;
+  margin-right: 100px;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto;
+}
