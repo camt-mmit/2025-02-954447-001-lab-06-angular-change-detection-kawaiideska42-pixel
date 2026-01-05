@@ -1,97 +1,221 @@
-/* Container การจัดการระยะห่างหลัก */
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* กำหนดตัวแปรและรีเซ็ตพื้นฐาน */
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+
+  --app-monospace-font: ui-monospace, monospace;
+  --app-color-primary: #007bff; /* ใช้สีน้ำเงินเป็นสีหลัก */
+  --app-color-warn: #dc3545; /* ใช้สีแดงสำหรับเตือน */
+  --app-spacing: 4px;
+  --app-padding-small: 0.5em 1ch;
+  --app-max-section-width: 400px; /* จำกัดความกว้าง Section ให้กว้างขึ้นเล็กน้อย */
 }
 
-/* การตกแต่ง Card ของแต่ละ Section */
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e0e6ed;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
+:root,
+body {
+  padding: 0px;
+  margin: 0px;
 }
 
-.card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+/* ------------------------------------------------ */
+
+/* การจัดวาง Body และองค์ประกอบหลักให้อยู่กึ่งกลาง */
+body {
+  padding: 20px 0;
+  /* จัด Body ให้อยู่กึ่งกลางหน้าจอ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
 }
 
-/* ปรับแต่ง Input Number */
-input[type='number'] {
-  width: 100px;
-  padding: 6px 10px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  outline: none;
-  transition: border-color 0.2s;
+/* ------------------------------------------------ */
+
+/* Utility Classes สำหรับสี */
+/* กำหนดสีหลักให้ปุ่ม add section */
+.app-cmd-add-section {
+  --app-color: var(--app-color-primary);
 }
 
-input[type='number']:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+/* กำหนดสีหลักให้ Section Header */
+.app-cmp-section-header {
+  --app-color: var(--app-color-primary);
 }
 
-/* ส่วนแสดงผล Total (Summary) */
-.bg-light {
-  background-color: #f8f9fa !important;
-  border-radius: 8px;
-  border-left: 4px solid #28a745; /* เพิ่มเส้นสีเขียวให้ดูเป็นผลรวม */
+/* กำหนดสีเตือนสำหรับปุ่มลบ */
+.app-cl-warn {
+  --app-color: var(--app-color-warn);
 }
 
-/* การจัดการปุ่มต่างๆ */
-button {
-  cursor: pointer;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-weight: 500;
-  border: 1px solid transparent;
-  transition: all 0.2s;
+/* ------------------------------------------------ */
+
+/* การจัดรูปแบบตัวเลข (ใช้ Monospace และชิดขวา) */
+input[type='number'],
+.app-cl-number {
+  font-family: var(--app-monospace-font);
+  text-align: right;
+  padding: 0.25em 0.5ch;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
-/* ปุ่มลบ (สีแดง/เทา) */
-button[click*='remove'] {
-  background-color: #fff1f0;
-  color: #ff4d4f;
-  border-color: #ffa39e;
-}
-
-button[click*='remove']:hover:not(:disabled) {
-  background-color: #ff4d4f;
-  color: white;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  filter: grayscale(1);
-}
-
-/* ปุ่ม Add Number */
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #0069d9;
-}
-
-/* ปุ่ม Add New Section (ด้านล่างสุด) */
-.btn-success {
-  background-color: #e42214;
-  color: white;
-  padding: 12px;
-  font-size: 1rem;
-  margin-top: 20px;
-}
-
-/* จัดตำแหน่งลำดับตัวเลข 1, 2, 3 ให้ดูเด่นขึ้น */
-span {
-  display: inline-block;
-  width: 25px;
+/* Output Number */
+.app-out-number {
   font-weight: bold;
-  color: #6c757d;
+  text-decoration: underline double;
+  /* ลบ padding-right ที่อยู่ใน HTML ออกเพื่อให้โค้ด CSS ควบคุมแทน */
+}
+
+/* ------------------------------------------------ */
+
+/* Component: ปุ่ม (Button) */
+.app-cl-btn {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: var(--app-padding-small);
+  margin: 2px; /* เพิ่ม margin เล็กน้อย */
+
+  border: 1px solid currentColor; /* ใช้สีปัจจุบันของปุ่มเป็นสีขอบ */
+  border-radius: 4px;
+  background-color: transparent;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  /* ดึงสีจาก Utility class (app-cl-primary/warn) หรือ inherit */
+  color: var(--app-color, inherit);
+
+  & > * {
+    pointer-events: none; /* ป้องกันการคลิกที่ไอคอน/ข้อความย่อย */
+  }
+
+  /* ปุ่มที่มีเฉพาะไอคอน */
+  &.app-cl-icon {
+    padding: 4px; /* ปรับ padding ให้ไอคอนดูเล็กลง */
+  }
+
+  &:disabled {
+    opacity: 0.25;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: color-mix(
+      in srgb,
+      currentColor 10%,
+      transparent
+    ); /* ใช้สีปัจจุบันของปุ่ม ผสมกับโปร่งใส */
+  }
+}
+
+/* ------------------------------------------------ */
+
+/* Component: Section List */
+.app-cmp-section-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px; /* ระยะห่างระหว่างแต่ละ Section */
+  width: var(--app-max-section-width); /* ใช้ width คงที่เพื่อให้ Section อยู่กึ่งกลาง */
+}
+
+/* Component: Section (แต่ละบล็อก) */
+.app-cmp-section {
+  display: flex;
+  flex-direction: column;
+
+  width: min(var(--app-max-section-width), 95vw); /* จำกัดความกว้างไม่ให้เกิน 95% ของ viewport */
+
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  /* ใช้ margin auto เพื่อจัดกึ่งกลางแนวนอน (แม้ว่าเราจะควบคุมด้วย body แล้วก็ตาม) */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section Header (Title + Buttons) */
+.app-cmp-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.app-cmp-section-header > * {
+  /* จัดกลุ่มปุ่มลบใน header */
+  display: flex;
+  gap: var(--app-spacing);
+}
+
+.app-title-section {
+  font-size: 1.2rem;
+  color: blue;
+}
+
+.app-cl-warn {
+  color: #dc3545;
+}
+
+/* ------------------------------------------------ */
+
+/* Component: Number Input List */
+.app-cmp-number-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--app-spacing);
+  margin: 10px 0;
+}
+
+/* Component: Number Input Item */
+.app-cmp-number {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  & > label {
+    flex: 1 0 auto;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 4px; /* ระยะห่างใน label */
+
+    & > b {
+      /* ส่วนข้อความนำ (Number 1 ::) */
+      display: inherit;
+      flex-direction: inherit;
+      align-items: inherit;
+
+      margin-right: 1ch;
+      width: 10ch; /* ความกว้างคงที่ 10 ตัวอักษร */
+
+      & > .app-title-number {
+        margin-left: auto; /* ผลักตัวเลขชิดขวาในความกว้าง 10ch */
+        font-family: var(--app-monospace-font);
+      }
+    }
+
+    & > :is(input, output) {
+      flex: 1 0 auto;
+      box-sizing: border-box;
+      height: 100%;
+    }
+  }
 }

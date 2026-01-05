@@ -1,43 +1,69 @@
-<div class="container p-4">
+<div class="container p-4 app-cmp-section-list">
+  <button
+    type="button"
+    (click)="addSection()"
+    class="app-cl-btn app-cmd-add-section"
+    style="align-self: center; margin-top: 10px"
+  >
+    Add New Section
+  </button>
   @for (section of sections; track section; let i = $index) {
-    <div class="card mb-4 p-3 border shadow-sm">
-      <div class="d-flex justify-content-between">
-        <button type="button" (click)="removeSection(i)" [disabled]="sections.length === 1">
-          Remove Section
-        </button>
+    <div class="app-cmp-section">
+      <div class="app-cmp-section-header">
+        <span class="app-title-section">Section {{ i + 1 }}</span>
+        <div>
+          <button
+            type="button"
+            (click)="removeSection(i)"
+            [disabled]="sections.length === 1"
+            class="app-cl-btn app-cl-warn"
+          >
+            Remove Section
+          </button>
+        </div>
       </div>
 
-      <div class="my-3">
+      <div class="app-cmp-number-list">
         @for (num of section.numbers; track num; let j = $index) {
-          <div class="mb-2">
-            <span>{{ j + 1 }}</span>
+          <div class="app-cmp-number">
+            <label>
+              <b>
+                <span>Number</span>
+                <span class="app-title-number">{{ j + 1 }}</span>
+              </b>
 
-            <input
-              type="number"
-              #elem
-              [value]="num.value"
-              (input)="onNumberChange(i, j, elem.valueAsNumber)"
-              class="mx-2"
-            />
+              <input
+                type="number"
+                #elem
+                [value]="num.value"
+                (input)="onNumberChange(i, j, elem.valueAsNumber)"
+                class="app-inp-number"
+              />
+            </label>
 
-            <button (click)="removeNumber(i, j)" [disabled]="section.numbers.length === 1">
+            <button
+              type="button"
+              (click)="removeNumber(i, j)"
+              [disabled]="section.numbers.length === 1"
+              class="app-cl-btn app-cl-warn app-cl-icon"
+            >
               Remove
             </button>
           </div>
         }
       </div>
 
-      <button type="button" (click)="addNumber(i)" class="btn btn-sm btn-primary">
+      <button
+        type="button"
+        (click)="addNumber(i)"
+        class="app-cl-btn app-cl-icon app-cmd-add-section"
+      >
         + Add Number
       </button>
 
-      <div class="mt-3 p-2 bg-light">
-        <div><strong>Total:</strong> {{ getSummaryText(i) }}</div>
+      <div class="app-cl-number app-out-number" style="margin-top: 12px">
+        <strong>Total:</strong> {{ getSummaryText(i) }}
       </div>
     </div>
   }
-
-  <button type="button" (click)="addSection()" class="btn btn-success w-100">
-    Add New Section
-  </button>
 </div>
